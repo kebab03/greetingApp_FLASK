@@ -1,14 +1,13 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask,render_template,request
 
 app = Flask(__name__)
-app.secret_key = "manbearpig_MUDMAN888"
+@app.route("/",methods=["GET","POST"])
+def hello_world():
+    if request.method=="GET":
+        return render_template("index@34.html")
+    if request.method=="POST":
+        return render_template("greet.html",name = request.form.get("name","world"))
 
-@app.route("/hello")
-def index():
-	flash("what's your name?")
-	return render_template("index.html")
-
-@app.route("/greet", methods=['POST', 'GET'])
-def greeter():
-	flash("Hi " + str(request.form['name_input']) + ", great to see you!")
-	return render_template("index.html")
+#        "TODO"
+if __name__ == '__main__':
+    app.run()
